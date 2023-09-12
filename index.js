@@ -8,13 +8,23 @@
 //   return false;
 // }
 
+// function hasTargetSum(array, target) {
+//   let i = 0;
+//   let j = array.length - 1;
+//   array.sort((a, b) => a - b);
+//   while (i < j) {
+//     if (array[i] + array[j] === target) return true;
+//     array[i] + array[j] > target ? j-- : i++;
+//   }
+//   return false;
+// }
+
 function hasTargetSum(array, target) {
-  let i = 0;
-  let j = array.length - 1;
-  array.sort((a, b) => a - b);
-  while (i < j) {
-    if (array[i] + array[j] === target) return true;
-    array[i] + array[j] > target ? j-- : i++;
+  const seenNums = new Set();
+  for (const num of array) {
+    const complement = target - num;
+    if (seenNums.has(complement)) return true;
+    seenNums.add(num);
   }
   return false;
 }
@@ -22,6 +32,7 @@ function hasTargetSum(array, target) {
 /* 
   Option 1: O(n ^ 2) => nested loop
   Option 2: O(n) => two non-nested iterators
+  Option 3: O(n) => one iterator
 */
 
 /* 
